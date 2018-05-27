@@ -2,12 +2,13 @@ package gr.georkouk.recipes.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @SuppressWarnings("unused")
-public class Recipe {
+public class Recipe implements Serializable {
 
     @SerializedName("id")
     private Integer id;

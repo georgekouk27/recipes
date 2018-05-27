@@ -2,12 +2,14 @@ package gr.georkouk.recipes.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 
 @SuppressWarnings("unused")
-public class Ingredient {
+public class Ingredient implements Serializable {
 
     @SerializedName("quantity")
-    private double quantity;
+    private Double quantity;
 
     @SerializedName("measure")
     private String measure;
@@ -18,7 +20,7 @@ public class Ingredient {
     public Ingredient() {
     }
 
-    public double getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 

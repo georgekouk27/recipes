@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="vertical_margin_small">4dp</dimen>
+    <dimen name="horizontal_margin_medium">8dp</dimen>
+    <dimen name="large_margin">16dp</dimen>
+
+    <dimen name="widget_title_size">30sp</dimen>
+    <dimen name="title_size">24sp</dimen>
+    <dimen name="subtitle_size">20sp</dimen>
+    <dimen name="widget_size">14sp</dimen>
+    <dimen name="media_main_icon">100dp</dimen>
+    <dimen name="media_sub_icon">70dp</dimen>
+    <dimen name="regular_icon_size">40dp</dimen>
+</resources>

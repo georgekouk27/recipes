@@ -1,5 +1,6 @@
 package gr.georkouk.recipes;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ public class ActivityMain extends AppCompatActivity {
 
     private RestApi restApi;
     private RecyclerAdapterRecipes adapterRecipes;
-    private RecyclerView recyclerView;
 
 
     @Override
@@ -37,9 +37,9 @@ public class ActivityMain extends AppCompatActivity {
 
     private void initializeView(){
 
-        this.recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
-        this.recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
         this.adapterRecipes = new RecyclerAdapterRecipes(this);
 
@@ -47,12 +47,16 @@ public class ActivityMain extends AppCompatActivity {
 
             @Override
             public void onRecipeClick(Recipe recipe) {
+                Intent intent = new Intent(ActivityMain.this, ActivityDetails.class);
 
+                intent.putExtra("recipe", recipe);
+
+                startActivity(intent);
             }
 
         });
 
-        this.recyclerView.setAdapter(this.adapterRecipes);
+        recyclerView.setAdapter(this.adapterRecipes);
     }
 
     private void fillRecipes(){

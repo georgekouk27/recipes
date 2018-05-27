@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Recipes</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+
+    <string name="unknownRecipe">Unknown Recipe</string>
+    <string name="error_media_player">Media Player Error Occurred</string>
+    <string name="error_connectivity">ConnectivityError</string>
+    <string name="audio_focus_denied">Audio Focus Request Denied</string>
+    <string name="previous_step">Previous Step</string>
+    <string name="next_step">Next Step</string>
 </resources>
