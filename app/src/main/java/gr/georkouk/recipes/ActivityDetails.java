@@ -8,18 +8,27 @@ import android.widget.Toast;
 
 import gr.georkouk.recipes.entity.Recipe;
 import gr.georkouk.recipes.fragment.FragmentStepDetails;
+import gr.georkouk.recipes.utils.RecipesIdlingResource;
+
+import static gr.georkouk.recipes.utils.IdlingResources.getIdlingResource;
 
 
 public class ActivityDetails extends AppCompatActivity {
 
     private Recipe recipe;
     private boolean twoPane;
+    public static RecipesIdlingResource idlingResource;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+        idlingResource = getIdlingResource(idlingResource);
+        if (idlingResource != null) {
+            idlingResource.setIdleState(false);
+        }
 
         Intent intent = getIntent();
 
@@ -35,6 +44,11 @@ public class ActivityDetails extends AppCompatActivity {
         setTitle(this.recipe.getName());
 
         twoPane = findViewById(R.id.fragmentStepDetails) != null;
+
+        idlingResource = getIdlingResource(idlingResource);
+        if (idlingResource != null) {
+            idlingResource.setIdleState(true);
+        }
     }
 
     public Recipe getSelectedRecipe() {

@@ -2,20 +2,25 @@ package gr.georkouk.recipes;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+
 import java.util.List;
+
 import gr.georkouk.recipes.adapter.RecyclerAdapterRecipes;
 import gr.georkouk.recipes.entity.Recipe;
 import gr.georkouk.recipes.interfaces.RestApi;
 import gr.georkouk.recipes.network.RestClient;
+import gr.georkouk.recipes.utils.RecipesIdlingResource;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static gr.georkouk.recipes.utils.IdlingResources.getIdlingResource;
 
 
 public class ActivityMain extends AppCompatActivity {
@@ -24,6 +29,7 @@ public class ActivityMain extends AppCompatActivity {
     private static final int RECYCLERVIEW_COLUMNS_FOR_MOBILE_PORTRAIT = 1;
     private static final int RECYCLERVIEW_COLUMNS_FOR_MOBILE_LANDSCAPE = 2;
 
+    public static RecipesIdlingResource idlingResource;
     private RestApi restApi;
     private RecyclerAdapterRecipes adapterRecipes;
     private int columnsNum;
@@ -48,9 +54,15 @@ public class ActivityMain extends AppCompatActivity {
 
         initializeView();
 
+        idlingResource = getIdlingResource(idlingResource);
+        if (idlingResource != null) {
+            idlingResource.setIdleState(false);
+        }
+
         this.restApi = RestClient.getClient().create(RestApi.class);
 
         fillRecipes();
+
     }
 
     private void initializeView(){
@@ -85,6 +97,10 @@ public class ActivityMain extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<List<Recipe>> call, @NonNull Response<List<Recipe>> response) {
                 adapterRecipes.swapData(response.body());
+
+                if (idlingResource != null) {
+                    idlingResource.setIdleState(true);
+                }
             }
 
             @Override
