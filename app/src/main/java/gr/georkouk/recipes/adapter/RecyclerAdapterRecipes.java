@@ -1,6 +1,5 @@
 package gr.georkouk.recipes.adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,18 +9,19 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import gr.georkouk.recipes.R;
 import gr.georkouk.recipes.entity.Recipe;
 
 
 public class RecyclerAdapterRecipes extends RecyclerView.Adapter<RecyclerAdapterRecipes.ViewHolder>{
 
-    private Context context;
     private List<Recipe> recipes;
     private OnItemclickListener onItemclickListener;
 
-    public RecyclerAdapterRecipes(Context context){
-        this.context = context;
+    public RecyclerAdapterRecipes(){
         this.recipes = new ArrayList<>();
     }
 
@@ -67,15 +67,19 @@ public class RecyclerAdapterRecipes extends RecyclerView.Adapter<RecyclerAdapter
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private View view;
-        private TextView tvRecipeName;
-        private TextView tvRecipeServings;
+
+        @BindView(R.id.tvRecipeName)
+        TextView tvRecipeName;
+
+        @BindView(R.id.tvRecipeServings)
+        TextView tvRecipeServings;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             this.view = itemView;
-            this.tvRecipeName = view.findViewById(R.id.tvRecipeName);
-            this.tvRecipeServings = view.findViewById(R.id.tvRecipeServings);
+
+            ButterKnife.bind(this, view);
         }
 
     }

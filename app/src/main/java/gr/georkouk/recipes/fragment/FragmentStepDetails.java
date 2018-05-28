@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.util.Util;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import gr.georkouk.recipes.ActivityDetails;
 import gr.georkouk.recipes.ActivityStepDetails;
 import gr.georkouk.recipes.R;
@@ -33,14 +35,34 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
     private final static String PLAYBACK_POS = "playbackPos";
     private final static String STEP_INDEX = "stepIndex";
 
+    @BindView(R.id.play_media_step_details)
+    PlayerView exoPlayerView;
+
+    @BindView(R.id.video_thumbnail_details)
+    ImageView thumbnail;
+
+    @BindView(R.id.text_view_description_step_details)
+    TextView descriptionTextView;
+
+    @BindView(R.id.media_layout_step_details)
+    FrameLayout mediaLayout;
+
+    @BindView(R.id.progress_bar_load_media_step_details)
+    ProgressBar mediaLoadingProgressBar;
+
+    @BindView(R.id.media_connectivity_error)
+    LinearLayout connectivityErrorLayout;
+
+    @BindView(R.id.image_view_refresh_media_step_details)
+    ImageView imageRefreshMedia;
+
+    @BindView(R.id.previous_step_details_linear)
+    LinearLayout btPrevious;
+
+    @BindView(R.id.next_step_details_linear)
+    LinearLayout btNext;
+
     private Recipe recipe;
-    private PlayerView exoPlayerView;
-    private ImageView thumbnail;
-    private TextView descriptionTextView;
-    private FrameLayout mediaLayout;
-    private ProgressBar mediaLoadingProgressBar;
-    private LinearLayout connectivityErrorLayout;
-    private ImageView imageRefreshMedia;
     private int selectedStepNum;
     private long playerPosition = 0;
     private Step step;
@@ -53,7 +75,9 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_step_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_step_details, container, false);
+
+        ButterKnife.bind(this, view);
 
         this.selectedStepNum = 0;
 
@@ -74,7 +98,7 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
             }
         }
 
-        return rootView;
+        return view;
     }
 
     @Override
@@ -141,24 +165,8 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
     }
 
     private void initializeView(){
-        this.exoPlayerView = getActivity().findViewById(R.id.play_media_step_details);
-
-        this.thumbnail = getActivity().findViewById(R.id.video_thumbnail_details);
-
-        this.descriptionTextView = getActivity().findViewById(R.id.text_view_description_step_details);
-
-        this.mediaLayout = getActivity().findViewById(R.id.media_layout_step_details);
-
-        this.mediaLoadingProgressBar = getActivity().findViewById(R.id.progress_bar_load_media_step_details);
-
-        this.connectivityErrorLayout = getActivity().findViewById(R.id.media_connectivity_error);
-
-        this.imageRefreshMedia = getActivity().findViewById(R.id.image_view_refresh_media_step_details);
-
-        LinearLayout btPrevious = getActivity().findViewById(R.id.previous_step_details_linear);
         btPrevious.setOnClickListener(this);
 
-        LinearLayout btNext = getActivity().findViewById(R.id.next_step_details_linear);
         btNext.setOnClickListener(this);
 
         if(!ConfigurationInfo.onPhoneLandscape(getContext())

@@ -12,6 +12,8 @@ import android.util.Log;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import gr.georkouk.recipes.adapter.RecyclerAdapterRecipes;
 import gr.georkouk.recipes.entity.Recipe;
 import gr.georkouk.recipes.interfaces.RestApi;
@@ -30,9 +32,11 @@ public class ActivityMain extends AppCompatActivity {
     private static final int RECYCLERVIEW_COLUMNS_FOR_MOBILE_PORTRAIT = 1;
     private static final int RECYCLERVIEW_COLUMNS_FOR_MOBILE_LANDSCAPE = 2;
 
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+
     public static RecipesIdlingResource idlingResource;
     private RestApi restApi;
-    private RecyclerView recyclerView;
     private RecyclerAdapterRecipes adapterRecipes;
     private int columnsNum;
     private Parcelable recyclerPos;
@@ -42,6 +46,8 @@ public class ActivityMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ButterKnife.bind(this);
 
         if(getResources().getBoolean(R.bool.isTablet)) {
             columnsNum = RECYCLERVIEW_COLUMNS_FOR_TABLET;
@@ -84,12 +90,9 @@ public class ActivityMain extends AppCompatActivity {
     }
 
     private void initializeView(){
-
-        recyclerView = findViewById(R.id.recyclerView);
-
         recyclerView.setLayoutManager(new GridLayoutManager(this, columnsNum));
 
-        this.adapterRecipes = new RecyclerAdapterRecipes(this);
+        this.adapterRecipes = new RecyclerAdapterRecipes();
 
         this.adapterRecipes.setOnItemClickListener(new RecyclerAdapterRecipes.OnItemclickListener() {
 

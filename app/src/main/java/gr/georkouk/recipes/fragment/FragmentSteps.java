@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import gr.georkouk.recipes.ActivityDetails;
 import gr.georkouk.recipes.R;
 import gr.georkouk.recipes.adapter.RecyclerAdapterSteps;
@@ -20,6 +22,12 @@ import gr.georkouk.recipes.entity.Ingredient;
 import gr.georkouk.recipes.entity.Recipe;
 
 public class FragmentSteps extends Fragment{
+
+    @BindView(R.id.tvIngredients)
+    TextView tvIngredients;
+
+    @BindView(R.id.recyclerViewSteps)
+    RecyclerView recyclerView;
 
     private Recipe recipe;
 
@@ -29,8 +37,11 @@ public class FragmentSteps extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_steps, container, false);
 
-        return inflater.inflate(R.layout.fragment_steps, container, false);
+        ButterKnife.bind(this, view);
+
+        return view;
     }
 
     @Override
@@ -43,11 +54,7 @@ public class FragmentSteps extends Fragment{
     }
 
     private void initializeView(){
-        TextView tvIngredients = getActivity().findViewById(R.id.tvIngredients);
-
         tvIngredients.setText(getIngredientsText());
-
-        RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerViewSteps);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 

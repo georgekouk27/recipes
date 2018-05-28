@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import gr.georkouk.recipes.R;
 import gr.georkouk.recipes.entity.Step;
 
@@ -64,15 +67,19 @@ public class RecyclerAdapterSteps extends RecyclerView.Adapter<RecyclerAdapterSt
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private View view;
-        private TextView tvStepNumber;
-        private TextView tvStepName;
+
+        @BindView(R.id.tvStepNumber)
+        TextView tvStepNumber;
+
+        @BindView(R.id.tvStepName)
+        TextView tvStepName;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             this.view = itemView;
-            this.tvStepNumber = view.findViewById(R.id.tvStepNumber);
-            this.tvStepName = view.findViewById(R.id.tvStepName);
+
+            ButterKnife.bind(this, view);
         }
 
     }
