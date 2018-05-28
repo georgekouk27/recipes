@@ -6,7 +6,7 @@
         <item>
             <rotate
                 android:fromDegrees="0"
-                android:toDegrees="72">
+                android:toDegrees="70">
                 <shape
                     android:innerRadiusRatio="2.5"
                     android:shape="ring"
@@ -25,7 +25,7 @@
         <item>
             <rotate
                 android:fromDegrees="45"
-                android:toDegrees="144">
+                android:toDegrees="140">
                 <shape
                     android:innerRadiusRatio="2.6"
                     android:shape="ring"
@@ -44,7 +44,7 @@
         <item>
             <rotate
                 android:fromDegrees="90"
-                android:toDegrees="216">
+                android:toDegrees="210">
                 <shape
                     android:innerRadiusRatio="2.7"
                     android:shape="ring"
@@ -62,7 +62,7 @@
         <item>
             <rotate
                 android:fromDegrees="140"
-                android:toDegrees="288">
+                android:toDegrees="280">
                 <shape
                     android:innerRadiusRatio="2.9"
                     android:shape="ring"
@@ -89,8 +89,8 @@
                     android:useLevel="true">
                     <gradient
                         android:angle="0"
-                        android:endColor="#00BCD4"
-                        android:startColor="#03A9F4"
+                        android:endColor="#009688"
+                        android:startColor="#00796B"
                         android:useLevel="false" />
                 </shape>
             </rotate>
