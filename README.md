@@ -22,6 +22,8 @@ With the app, you can:
 
 ![screen](../master/screens/phoneMainLand.png)
 
+![screen](../master/screens/widget.png)
+
 ## Libraries
 
 * [Glide](https://bumptech.github.io/glide/)
