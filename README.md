@@ -14,7 +14,7 @@ With the app, you can:
 
 ![screen](../master/screens/phoneMain.png)
 
-![screen](../master/screens/phoneDetails.png)
+![screen](../master/screens/phoneSteps.png)
 
 ![screen](../master/screens/phoneStepDetails.png)
 
