@@ -9,6 +9,7 @@ With the app, you can:
 * See the ingredients list of a selected recipe
 * See the steps of a selected recipe
 * Watch the details of a selected step and a video if available
+* Add a widget of a recipe to your home screen
 
 ## Screens
 
