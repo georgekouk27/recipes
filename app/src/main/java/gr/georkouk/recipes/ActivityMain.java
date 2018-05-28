@@ -3,6 +3,7 @@ package gr.georkouk.recipes;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,8 +32,10 @@ public class ActivityMain extends AppCompatActivity {
 
     public static RecipesIdlingResource idlingResource;
     private RestApi restApi;
+    private RecyclerView recyclerView;
     private RecyclerAdapterRecipes adapterRecipes;
     private int columnsNum;
+    private Parcelable recyclerPos;
 
 
     @Override
@@ -59,15 +62,30 @@ public class ActivityMain extends AppCompatActivity {
             idlingResource.setIdleState(false);
         }
 
+        this.recyclerPos = null;
+        if(savedInstanceState != null) {
+            recyclerPos =  savedInstanceState.getParcelable("recyclerPos");
+        }
+
         this.restApi = RestClient.getClient().create(RestApi.class);
 
         fillRecipes();
 
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable(
+                "recyclerPos",
+                recyclerView.getLayoutManager().onSaveInstanceState()
+        );
+
+        super.onSaveInstanceState(outState);
+    }
+
     private void initializeView(){
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, columnsNum));
 
@@ -100,6 +118,12 @@ public class ActivityMain extends AppCompatActivity {
 
                 if (idlingResource != null) {
                     idlingResource.setIdleState(true);
+                }
+
+                if(recyclerPos != null){
+                    recyclerView.getLayoutManager().onRestoreInstanceState(recyclerPos);
+
+                    recyclerPos = null;
                 }
             }
 

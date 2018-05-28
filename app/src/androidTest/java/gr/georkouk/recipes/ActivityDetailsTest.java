@@ -104,7 +104,7 @@ public class ActivityDetailsTest {
 
     @Test
     public void clickOnRecipeStep_opensUpStepDetailsActivity() {
-        onView(ViewMatchers.withId(R.id.recyclerView))
+        onView(ViewMatchers.withId(R.id.recyclerViewSteps))
                 .perform(RecyclerViewActions.scrollToPosition(0));
 
         onView(withId(R.id.recyclerViewSteps))
@@ -120,7 +120,7 @@ public class ActivityDetailsTest {
 
     @Test
     public void clickOnRecipeStep_opensUpStepDetailsActivityWithCorrespondingInfo() {
-        onView(ViewMatchers.withId(R.id.recyclerView))
+        onView(ViewMatchers.withId(R.id.recyclerViewSteps))
                 .perform(RecyclerViewActions.scrollToPosition(0));
 
         onView(withId(R.id.recyclerViewSteps))

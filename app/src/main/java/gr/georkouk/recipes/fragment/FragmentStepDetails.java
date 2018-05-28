@@ -239,6 +239,14 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
     public void showStepDetails(int position){
         this.selectedStepNum = position;
 
+        playerPosition = 0;
+
+        if(exoPlayerConf != null) {
+            exoPlayerConf.abandon();
+        }
+
+        exoPlayerConf = null;
+
         fillView(true);
     }
 
@@ -248,6 +256,8 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
             case R.id.previous_step_details_linear:
                 if((selectedStepNum - 1) >= 0){
                     selectedStepNum--;
+
+                    playerPosition = 0;
 
                     if(exoPlayerConf != null) {
                         exoPlayerConf.abandon();
@@ -262,6 +272,8 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
             case R.id.next_step_details_linear:
                 if((selectedStepNum + 1) < this.recipe.getSteps().size()){
                     selectedStepNum++;
+
+                    playerPosition = 0;
 
                     if(exoPlayerConf != null) {
                         exoPlayerConf.abandon();
