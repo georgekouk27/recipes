@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -152,23 +151,32 @@ public class ExoPlayerConf {
                 if(exoPlayer != null &&
                         (exoPlayer.getPlaybackState() == Player.STATE_READY
                                 || exoPlayer.getPlaybackState() == Player.STATE_ENDED)) {
-                    if(visibility == 0)
+
+                    if(visibility == 0) {
                         exoPlayerView.showController();
-                    else
+                    }
+                    else {
                         exoPlayerView.hideController();
+                    }
                 }
                 else {
                     exoPlayerView.hideController();
                 }
+
                 if(exoPlayer == null || !exoPlayer.getPlayWhenReady()) {
+
                     if(exoPlayer == null && mediaUri != null && !mediaUri.toString().equals("")) {
                         initializeMediaSession();
                         initializePlayer(mediaUri);
                     }
-                    if(visibility == 0)
+
+                    if(visibility == 0) {
                         exoPlayerView.showController();
-                    else
+                    }
+                    else {
                         exoPlayerView.hideController();
+                    }
+
                 }
             }
         });
@@ -305,8 +313,8 @@ public class ExoPlayerConf {
             int result = audioManager.requestAudioFocus(
                     onAudioFocusChangeListener,
                     AudioManager.STREAM_MUSIC,
-                    AudioManager.AUDIOFOCUS_GAIN)
-                    ;
+                    AudioManager.AUDIOFOCUS_GAIN
+            );
 
             BandwidthMeter defaultBandWidthMeter = new DefaultBandwidthMeter();
             TrackSelection.Factory videoTrackSelectionFactory =
@@ -334,7 +342,9 @@ public class ExoPlayerConf {
                             .createMediaSource(mediaUri);
 
             // restoring position
-            if (startPos != 0) exoPlayer.seekTo(startPos);
+            if (startPos != 0) {
+                exoPlayer.seekTo(startPos);
+            }
 
             exoPlayer.prepare(mediaSource, false, false);
             exoPlayer.setPlayWhenReady(result == AUDIOFOCUS_REQUEST_GRANTED);
@@ -432,21 +442,18 @@ public class ExoPlayerConf {
                 }
 
                 switch (playbackState) {
-                    // not prepared with a MediaSource yet
                     case Player.STATE_IDLE:
                         thumbnail.setVisibility(View.VISIBLE);
                         mediaLoadingProgressBar.setVisibility(View.VISIBLE);
                         exoPlayerView.hideController();
 
                         break;
-                    // not able to play yet from the current playerPosition because not enough data is buffered
                     case Player.STATE_BUFFERING:
                         thumbnail.setVisibility(View.VISIBLE);
                         mediaLoadingProgressBar.setVisibility(View.VISIBLE);
                         exoPlayerView.hideController();
 
                         break;
-                    // player does actually play media
                     case Player.STATE_READY:
                         thumbnail.setVisibility(View.GONE);
                         mediaLoadingProgressBar.setVisibility(View.GONE);
@@ -458,7 +465,6 @@ public class ExoPlayerConf {
                         );
 
                         break;
-                    // media played finished
                     case Player.STATE_ENDED:
                         thumbnail.setVisibility(View.GONE);
                         mediaLoadingProgressBar.setVisibility(View.GONE);
@@ -515,6 +521,7 @@ public class ExoPlayerConf {
         public void onReceive(Context context, Intent intent) {
             MediaButtonReceiver.handleIntent(mediaSession, intent);
         }
+
     }
 
 }

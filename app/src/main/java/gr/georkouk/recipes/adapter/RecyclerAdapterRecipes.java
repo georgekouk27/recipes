@@ -39,6 +39,7 @@ public class RecyclerAdapterRecipes extends RecyclerView.Adapter<RecyclerAdapter
         final Recipe recipe = this.recipes.get(position);
 
         holder.tvRecipeName.setText(recipe.getName());
+        holder.tvRecipeServings.setText(String.valueOf(recipe.getServings()));
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,12 +68,14 @@ public class RecyclerAdapterRecipes extends RecyclerView.Adapter<RecyclerAdapter
 
         private View view;
         private TextView tvRecipeName;
+        private TextView tvRecipeServings;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             this.view = itemView;
             this.tvRecipeName = view.findViewById(R.id.tvRecipeName);
+            this.tvRecipeServings = view.findViewById(R.id.tvRecipeServings);
         }
 
     }

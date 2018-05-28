@@ -10,8 +10,8 @@ import gr.georkouk.recipes.entity.Recipe;
 
 public class ActivityStepDetails extends AppCompatActivity {
 
-    Recipe recipe;
-    int position;
+    private Recipe recipe;
+    private int position;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,7 +22,10 @@ public class ActivityStepDetails extends AppCompatActivity {
 
         if (intent != null){
             this.recipe = (Recipe) intent.getSerializableExtra("recipe");
-            this.position = intent.getIntExtra("position", 0);
+
+            if(savedInstanceState == null) {
+                this.position = intent.getIntExtra("position", 0);
+            }
         }
         else {
             Toast.makeText(this, "Problem occurred", Toast.LENGTH_SHORT).show();
@@ -38,6 +41,10 @@ public class ActivityStepDetails extends AppCompatActivity {
 
     public int getPosition(){
         return this.position;
+    }
+
+    public void setPosition(int pos){
+        this.position = pos;
     }
 
 }

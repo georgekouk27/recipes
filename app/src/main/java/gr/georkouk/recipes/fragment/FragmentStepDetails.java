@@ -64,6 +64,13 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
 
             if(savedInstanceState.containsKey(STEP_INDEX)) {
                 selectedStepNum = (int) savedInstanceState.get(STEP_INDEX);
+
+                Activity activity = getActivity();
+
+                if(activity instanceof ActivityStepDetails) {
+                    ((ActivityStepDetails) getActivity()).setPosition(selectedStepNum);
+                }
+
             }
         }
 
@@ -191,10 +198,10 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
                 );
             }
 
-            if(ConfigurationInfo.onPhoneLandscape(getContext())){
-                if(getActivity() != null) {
-                    ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-                }
+            if(getActivity() != null
+                    && ConfigurationInfo.onPhoneLandscape(getContext())){
+
+                ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
             }
         }
 
@@ -205,7 +212,12 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
             this.step = this.recipe.getSteps().get(this.selectedStepNum);
         }
 
-        getActivity().setTitle(selectedStepNum + ") " + step.getShortDescription());
+        if(getResources().getBoolean(R.bool.isTablet)){
+            getActivity().setTitle(recipe.getName());
+        }
+        else {
+            getActivity().setTitle(selectedStepNum + ") " + step.getShortDescription());
+        }
 
         String mediaUrl = this.step.getVideoURL().trim();
         if(mediaUrl.trim().equals("")) {

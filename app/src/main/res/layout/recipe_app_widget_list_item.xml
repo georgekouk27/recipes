@@ -6,9 +6,10 @@
     android:minHeight="50dp"
     android:orientation="vertical"
     android:clickable="false"
+    android:background="@color/colorWidget"
     android:layout_marginBottom="@dimen/vertical_margin_small"
-    android:gravity="center_vertical"
-    android:paddingLeft="@dimen/vertical_margin_small">
+    android:gravity="center"
+    android:padding="@dimen/vertical_margin_small">
 
     <TextView
         android:textSize="@dimen/subtitle_size"
