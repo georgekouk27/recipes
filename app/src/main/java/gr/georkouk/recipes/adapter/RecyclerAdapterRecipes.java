@@ -1,11 +1,17 @@
 package gr.georkouk.recipes.adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +24,12 @@ import gr.georkouk.recipes.entity.Recipe;
 
 public class RecyclerAdapterRecipes extends RecyclerView.Adapter<RecyclerAdapterRecipes.ViewHolder>{
 
+    private Context context;
     private List<Recipe> recipes;
     private OnItemclickListener onItemclickListener;
 
-    public RecyclerAdapterRecipes(){
+    public RecyclerAdapterRecipes(Context context){
+        this.context = context;
         this.recipes = new ArrayList<>();
     }
 
@@ -40,6 +48,16 @@ public class RecyclerAdapterRecipes extends RecyclerView.Adapter<RecyclerAdapter
 
         holder.tvRecipeName.setText(recipe.getName());
         holder.tvRecipeServings.setText(String.valueOf(recipe.getServings()));
+
+        RequestOptions options = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .centerCrop()
+                .dontTransform()
+                .placeholder(R.drawable.ic_recipe)
+                .error(R.drawable.ic_recipe);
+
+        Glide.with(this.context).load(recipe.getImage()).apply(options)
+                .into(holder.imageView);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +91,9 @@ public class RecyclerAdapterRecipes extends RecyclerView.Adapter<RecyclerAdapter
 
         @BindView(R.id.tvRecipeServings)
         TextView tvRecipeServings;
+
+        @BindView(R.id.ivRecipeItem)
+        ImageView imageView;
 
         ViewHolder(View itemView) {
             super(itemView);

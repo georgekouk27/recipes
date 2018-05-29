@@ -92,7 +92,7 @@ public class ActivityMain extends AppCompatActivity {
     private void initializeView(){
         recyclerView.setLayoutManager(new GridLayoutManager(this, columnsNum));
 
-        this.adapterRecipes = new RecyclerAdapterRecipes();
+        this.adapterRecipes = new RecyclerAdapterRecipes(this);
 
         this.adapterRecipes.setOnItemClickListener(new RecyclerAdapterRecipes.OnItemclickListener() {
 
