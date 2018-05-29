@@ -230,6 +230,8 @@ public class ExoPlayerConf {
                 RequestOptions options = new RequestOptions()
                         .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                         .centerCrop()
+                        .placeholder(R.mipmap.ic_launcher_round)
+                        .error(R.mipmap.ic_launcher_round)
                         .dontTransform();
 
                 Glide.with(activity).load(thumbnail).apply(options)
