@@ -1,6 +1,7 @@
 package gr.georkouk.recipes.fragment;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,7 @@ public class FragmentSteps extends Fragment{
     RecyclerView recyclerView;
 
     private Recipe recipe;
+    private Parcelable recyclerPos;
 
 
     @Nullable
@@ -41,6 +43,11 @@ public class FragmentSteps extends Fragment{
 
         ButterKnife.bind(this, view);
 
+        this.recyclerPos = null;
+        if(savedInstanceState != null) {
+            recyclerPos =  savedInstanceState.getParcelable("recyclerPos");
+        }
+
         return view;
     }
 
@@ -51,6 +58,16 @@ public class FragmentSteps extends Fragment{
         this.recipe = ((ActivityDetails) getActivity()).getSelectedRecipe();
 
         initializeView();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable(
+                "recyclerPos",
+                recyclerView.getLayoutManager().onSaveInstanceState()
+        );
+
+        super.onSaveInstanceState(outState);
     }
 
     private void initializeView(){
@@ -72,6 +89,12 @@ public class FragmentSteps extends Fragment{
         recyclerView.setAdapter(recyclerAdapterSteps);
 
         recyclerAdapterSteps.swapData(this.recipe.getSteps());
+
+        if(recyclerPos != null){
+            recyclerView.getLayoutManager().onRestoreInstanceState(recyclerPos);
+
+            recyclerPos = null;
+        }
     }
 
     private String getIngredientsText(){
