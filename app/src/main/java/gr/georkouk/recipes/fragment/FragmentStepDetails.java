@@ -34,6 +34,7 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
 
     private final static String PLAYBACK_POS = "playbackPos";
     private final static String STEP_INDEX = "stepIndex";
+    private final static String PLAY_WHEN_READY = "playWhenReady";
 
     @BindView(R.id.play_media_step_details)
     PlayerView exoPlayerView;
@@ -65,6 +66,7 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
     private Recipe recipe;
     private int selectedStepNum;
     private long playerPosition = 0;
+    private boolean playWhenReady;
     private Step step;
     private ExoPlayerConf exoPlayerConf;
 
@@ -96,6 +98,8 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
                 }
 
             }
+
+            playWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY, false);
         }
 
         return view;
@@ -109,6 +113,7 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
         outState.putInt(STEP_INDEX, selectedStepNum);
 
         if(exoPlayerConf != null) {
+            outState.putBoolean(PLAY_WHEN_READY, exoPlayerConf.getPlayWhenReady());
             exoPlayerConf.abandon();
         }
     }
@@ -142,6 +147,8 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
 
         if(exoPlayerConf != null) {
             long currentPos = exoPlayerConf.getContentPosition();
+
+
 
             if(currentPos != -1) {
                 playerPosition = currentPos;
@@ -202,7 +209,8 @@ public class FragmentStepDetails extends Fragment implements View.OnClickListene
                         thumbnail,
                         Uri.parse(this.step.getThumbnailURL()),
                         connectivityErrorLayout,
-                        imageRefreshMedia
+                        imageRefreshMedia,
+                        playWhenReady
                 );
             }
 

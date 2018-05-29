@@ -52,6 +52,7 @@ public class ExoPlayerConf {
     final private PlayerView exoPlayerView;
     final private Activity activity;
     private long startPos;
+    private boolean playWhenReady;
     private Uri mediaUri;
     private Uri thumbnailUri;
     private ProgressBar mediaLoadingProgressBar;
@@ -70,13 +71,14 @@ public class ExoPlayerConf {
 
 
     public ExoPlayerConf(@NonNull final Activity activity,
-                          final PlayerView exoPlayerView,
-                          final long positionReset,
-                          final ProgressBar mediaLoadingProgressBar,
-                          final ImageView thumbnail,
-                          final Uri thumbnailUri,
-                          final LinearLayout connectivityErrorLayout,
-                          final ImageView refreshMedia) {
+                         final PlayerView exoPlayerView,
+                         final long positionReset,
+                         final ProgressBar mediaLoadingProgressBar,
+                         final ImageView thumbnail,
+                         final Uri thumbnailUri,
+                         final LinearLayout connectivityErrorLayout,
+                         final ImageView refreshMedia,
+                         final boolean playWhenReady) {
 
         this.exoPlayerView = exoPlayerView;
         this.activity = activity;
@@ -85,6 +87,7 @@ public class ExoPlayerConf {
         this.thumbnail = thumbnail;
         this.thumbnailUri = thumbnailUri;
         this.connectivityErrorLayout = connectivityErrorLayout;
+        this.playWhenReady = playWhenReady;
 
         if(ConfigurationInfo.onPhoneLandscape(activity)) {
             ConfigurationInfo.hideSystemUI(activity);
@@ -346,10 +349,13 @@ public class ExoPlayerConf {
             // restoring position
             if (startPos != 0) {
                 exoPlayer.seekTo(startPos);
+                exoPlayer.setPlayWhenReady(playWhenReady);
+            }
+            else{
+                exoPlayer.setPlayWhenReady(result == AUDIOFOCUS_REQUEST_GRANTED);
             }
 
             exoPlayer.prepare(mediaSource, false, false);
-            exoPlayer.setPlayWhenReady(result == AUDIOFOCUS_REQUEST_GRANTED);
         }
     }
 
@@ -378,6 +384,10 @@ public class ExoPlayerConf {
 
     public long getContentPosition() {
         return exoPlayer == null ? -1 : exoPlayer.getContentPosition();
+    }
+
+    public boolean getPlayWhenReady(){
+        return exoPlayer != null && exoPlayer.getPlayWhenReady();
     }
 
     // Handle different states
