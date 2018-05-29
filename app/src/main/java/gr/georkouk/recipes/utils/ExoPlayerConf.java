@@ -13,12 +13,14 @@ import android.support.annotation.NonNull;
 import android.support.v4.media.session.MediaButtonReceiver;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -42,7 +44,9 @@ import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory;
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 import com.google.android.exoplayer2.util.Util;
+
 import gr.georkouk.recipes.R;
+
 import static android.media.AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
 
 
@@ -250,7 +254,7 @@ public class ExoPlayerConf {
     private void restorePlaying() {
         stopWaitingForConnecion = false;
 
-        if(mediaUri != null && !mediaUri.toString().equals("")) {
+        if(TextUtils.isEmpty(mediaUri.toString())) {
             repairNeeded = false;
         }
 
