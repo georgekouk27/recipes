@@ -48,7 +48,7 @@ public class ActivityDetails extends AppCompatActivity {
 
         setTitle(this.recipe.getName());
 
-        twoPane = findViewById(R.id.fragmentStepDetails) != null;
+        twoPane = getResources().getBoolean(R.bool.isTablet);
 
         idlingResource = getIdlingResource(idlingResource);
         if (idlingResource != null) {
