@@ -13,7 +13,7 @@ With the app, you can:
 
 ## Screens
 
-![screen](../master/screens/phoneMain.png)
+<img src="/screens/phoneMain.png" width="500">
 
 ![screen](../master/screens/phoneSteps.png)
 
