@@ -15,15 +15,15 @@ With the app, you can:
 
 <img src="/screens/phoneMain.png" width="500">
 
-![screen](../master/screens/phoneSteps.png)
+<img src="/screens/phoneSteps.png" width="500">
 
-![screen](../master/screens/phoneStepDetails.png)
+<img src="/screens/phoneStepDetails.png" width="500">
 
-![screen](../master/screens/tabletDetails.png)
+<img src="/screens/tabletDetails.png" width="500">
 
-![screen](../master/screens/phoneMainLand.png)
+<img src="/screens/phoneMainLand.png" width="500">
 
-![screen](../master/screens/widget.png)
+<img src="/screens/widget.png" width="500">
 
 ## Libraries
 
